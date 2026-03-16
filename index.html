@@ -26,17 +26,110 @@
             line-height: 1.6;
         }
 
-        /* HEADER */
-        header {
+        /* NAVIGATION */
+        nav {
             background: #000;
-            padding: 20px 0;
-            text-align: center;
             border-bottom: 4px solid var(--gold);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        header img {
-            width: 180px;
-            height: auto;
+        nav .logo {
+            color: var(--gold);
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--gold);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: url('https://raw.githubusercontent.com/workspace-2026/Logo/refs/heads/main/Mimcontruction%20.jpeg') center/cover no-repeat;
+            padding: 150px 20px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 22px;
+            margin-bottom: 25px;
+        }
+
+        .cta-btn {
+            background: var(--gold);
+            color: #000;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .cta-btn:hover {
+            background: #fff;
+        }
+
+        /* ABOUT SECTION */
+        .about-section {
+            padding: 60px 20px;
+            max-width: 1100px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .about-section h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .about-section p {
+            max-width: 800px;
+            margin: auto;
+            font-size: 18px;
+            opacity: 0.9;
         }
 
         /* SLIDESHOW */
@@ -59,8 +152,8 @@
             inset: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;       /* Ensures perfect fill */
-            object-position: center; /* Keeps images centered */
+            object-fit: cover;
+            object-position: center;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
         }
@@ -93,6 +186,11 @@
             text-align: center;
         }
 
+        .services-section h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -114,7 +212,7 @@
             transform: translateY(-5px);
         }
 
-        /* CONTACT + BOOKING */
+        /* BOOKING + CONTACT */
         .contact-box,
         .booking-form {
             width: 90%;
@@ -155,116 +253,180 @@
             text-transform: uppercase;
         }
 
-        /* QR SECTION */
-        .barcode-footer {
-            text-align: center;
-            padding: 40px 20px;
+        /* FOOTER */
+        .site-footer {
+            background: #000;
+            color: #fff;
+            padding: 40px 20px 20px;
+            border-top: 4px solid var(--gold);
+            margin-top: 60px;
         }
 
-        .barcode-container {
-            display: inline-block;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background: #fff;
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: auto;
+            text-align: left;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #333;
+            font-size: 14px;
+            opacity: 0.8;
         }
     </style>
 </head>
 
 <body>
 
-    <div style="text-align:center; padding:40px 20px;">
-        <h2>Welcome to M.I.M General Construction</h2>
-        <p>Clean. Modern. Professional. Built to last.</p>
-    </div>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">M.I.M Construction</div>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#booking">Book</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-    <!-- SLIDESHOW -->
-<section class="slider-container">
-    
-<img class="fade-slide" 
-     src="https://raw.githubusercontent.com/workspace-2026/Logo/refs/heads/main/Mimcontruction%20.jpeg" 
-     alt="MIM Construction Logo">
-     
-     <img class="fade-slide"
-         src="https://raw.githubusercontent.com/workspace-2026/Image9.jpeg/refs/heads/main/Image9.jpeg" alt="Description of image">
-         
-          <img class="fade-slide"
-         src="https://raw.githubusercontent.com/workspace-2026/Image12.jpeg/refs/heads/main/Image5.jpeg" alt="Description of image">
-    
-     <img class="fade-slide"
-         src="https://raw.githubusercontent.com/workspace-2026/Image17.jpeg/refs/heads/main/Image17.jpeg" alt="Description of image">
-         
-          <img class="fade-slide"
-         src="https://raw.githubusercontent.com/workspace-2026/image22.jpeg/refs/heads/main/image22.jpeg" alt="Description of image">
-         
-          <img class="fade-slide"
-         src="https://raw.githubusercontent.com/workspace-2026/image49.jpeg/refs/heads/main/image45.jpeg" alt="Description of image">
-         
-          <img class="fade-slide"
-         src="https://raw.githubusercontent.com/workspace-2026/Image18.jpeg/refs/heads/main/Image18.jpeg" alt="Description of image">
-         
-          <img class="fade-slide"
-         src="https://raw.githubusercontent.com/workspace-2026/image62.jpeg/refs/heads/main/image62.jpeg" alt="Description of image">
-         
-          <img class="fade-slide"
-         src="https://raw.githubusercontent.com/workspace-2026/Image9.jpeg/refs/heads/main/Image9.jpeg" alt="Description of image">
-         
-          <img class="fade-slide"
-         src="https://raw.githubusercontent.com/workspace-2026/Image10.jpeg/refs/heads/main/Image10.jpeg" alt="Description of image">
-         
-          <img class="fade-slide"
-         src="https://raw.githubusercontent.com/workspace-2026/Image12..jpeg/refs/heads/main/Image12..jpeg" alt="Description of image">
-    
-     <img class="fade-slide"
-         src="https://raw.githubusercontent.com/workspace-2026/Image13.jpeg/refs/heads/main/Image13.jpeg" alt="Description of image">
-         
-          <img class="fade-slide"
-         src="https://raw.githubusercontent.com/workspace-2026/Image15.jpeg/refs/heads/main/Image15.jpeg" alt="Description of image">
-
-
-    <button class="nav-btn prev" onclick="changeSlide(-1)">&#10094;</button>
-    <button class="nav-btn next" onclick="changeSlide(1)">&#10095;</button>
-</section>
-
-    <!-- SERVICES -->
-    <section class="services-section">
-        <h2>Expert Residential Construction Services</h2>
-        <div class="services-grid">
-            <div class="service-card"><h3>🔨 General Construction</h3><p>Framing to finishing, durable professional results.</p></div>
-            <div class="service-card"><h3>🏠 Home Remodeling</h3><p>Modern upgrades tailored to your vision.</p></div>
-            <div class="service-card"><h3>🧰 Repairs</h3><p>Drywall, flooring, and structural fixes.</p></div>
-            <div class="service-card"><h3>🚪 Carpentry</h3><p>Precision trim, doors, and custom woodwork.</p></div>
-            <div class="service-card"><h3>🛁 Kitchen & Bath</h3><p>High-quality tile, cabinets, and installations.</p></div>
-            <div class="service-card"><h3>📐 Planning</h3><p>Clear timelines and organized management.</p></div>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>Quality Construction You Can Trust</h1>
+            <p>Professional residential services built with precision, honesty, and craftsmanship.</p>
+            <a href="#booking" class="cta-btn">Book Appointment</a>
         </div>
     </section>
 
+    <!-- ABOUT -->
+    <section class="about-section" id="about">
+        <h2>About M.I.M General Construction</h2>
+        <p>
+            With years of hands-on experience, M.I.M General Construction delivers reliable, high‑quality 
+            residential construction and remodeling services. From framing and carpentry to full home 
+            renovations, we take pride in craftsmanship that lasts. Our team is committed to professionalism, 
+            clear communication, and results that exceed expectations.
+        </p>
+    </section>
+
+    <!-- SLIDESHOW -->
+    <section class="slider-container">
+
+        <!-- Your images preserved -->
+        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Logo/refs/heads/main/Mimcontruction%20.jpeg">
+        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Image9.jpeg/refs/heads/main/Image9.jpeg">
+        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Image12.jpeg/refs/heads/main/Image5.jpeg">
+        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Image17.jpeg/refs/heads/main/Image17.jpeg">
+        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/image22.jpeg/refs/heads/main/image22.jpeg">
+        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/image49.jpeg/refs/heads/main/image45.jpeg">
+        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Image18.jpeg/refs/heads/main/Image18.jpeg">
+        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/image62.jpeg/refs/heads/main/image62.jpeg">
+        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Image10.jpeg/refs/heads/main/Image10.jpeg">
+        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Image12..jpeg/refs/heads/main/Image12..jpeg">
+        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Image13.jpeg/refs/heads/main/Image13.jpeg">
+        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_190758.jpg">
+         <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_190755.jpg">
+         <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_182152.jpg">
+          <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_103319.jpg">
+        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260306_102641.jpg">
+    
+
+
+
+
+        <button class="nav-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="nav-btn next" onclick="changeSlide(1)">&#10095;</button>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services-section" id="services">
+        <h2>Our Professional Services</h2>
+
+        <div class="services-grid">
+            <div class="service-card"><h3>🔨 General Construction</h3><p>From framing to finishing, we build with precision and durability.</p></div>
+            <div class="service-card"><h3>🏠 Home Remodeling</h3><p>Transform your home with modern upgrades and custom improvements.</p></div>
+            <div class="service-card"><h3>🧰 Repairs & Fixes</h3><p>Drywall, flooring, structural repairs, and more.</p></div>
+            <div class="service-card"><h3>🚪 Custom Carpentry</h3><p>Trim, doors, cabinetry, and custom woodwork built to perfection.</p></div>
+            <div class="service-card"><h3>🛁 Kitchen & Bath</h3><p>Tile, cabinets, plumbing, and full renovation services.</p></div>
+            <div class="service-card"><h3>📐 Project Planning</h3><p>Clear timelines, organized workflow, and professional management.</p></div>
+        </div>
+    </section>
 
     <!-- BOOKING -->
-    <div class="booking-form">
+    <div class="booking-form" id="booking">
         <h2 style="color:var(--gold)">Book an Appointment</h2>
+
         <form action="#" method="POST" style="text-align:left;">
             <label>Full Name</label><input type="text" required>
             <label>Phone Number</label><input type="tel" required>
             <label>Preferred Date</label><input type="date" required>
-            <label>Details</label><textarea rows="4" required></textarea>
+            <label>Project Details</label><textarea rows="4" required></textarea>
             <button type="submit" class="submit-btn">Send Request</button>
         </form>
-   
     </div>
 
-<!-- CONTACT -->
-<div class="contact-box">
-    <h2 style="color:var(--gold)">Contact Us</h2>
+    <!-- CONTACT -->
+    <div class="contact-box" id="contact">
+        <h2 style="color:var(--gold)">Contact Us</h2>
 
-    
-    <p>Phone: <a href="tel:7084381640">(708)438-1640</a></p>
+        <p>Phone: <a href="tel:7084381640">(708) 438‑1640</a></p>
+        <br>
+        <p>José Patiño</p>
+        <p>Phone: <a href="tel:3129297084">(312) 929‑7084</a></p>
+    </div>
 
-    <br>
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-content">
 
-    <p>José Patiño</p>
-    <p>Phone: <a href="tel:3129297084">(312) 929-7084</a></p>
-</div>
+            <div class="footer-section">
+                <h3>M.I.M General Construction</h3>
+                <p>Professional Residential Services • Built to Last</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>📞 (708) 438‑1640</p>
+                <p>📞 (312) 929‑7084</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#about">About</a><br>
+                <a href="#services">Services</a><br>
+                <a href="#booking">Book Appointment</a><br>
+                <a href="#contact">Contact</a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 M.I.M General Construction • All Rights Reserved</p>
+        </div>
+    </footer>
 
     <!-- SLIDESHOW SCRIPT -->
     <script>
@@ -286,3 +448,4 @@
 
 </body>
 </html>
+
