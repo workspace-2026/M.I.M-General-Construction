@@ -11,6 +11,7 @@
             --dark: #111;
             --light: #f7f7f7;
             --text: #333;
+            --white: #ffffff;
         }
 
         * {
@@ -20,13 +21,14 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            background: white;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--white);
             color: var(--text);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* NAVIGATION */
+        /* --- NAVIGATION --- */
         nav {
             background: #000;
             border-bottom: 4px solid var(--gold);
@@ -41,21 +43,23 @@
 
         nav .logo {
             color: var(--gold);
-            font-size: 22px;
-            font-weight: bold;
+            font-size: 1.4rem;
+            font-weight: 800;
+            text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: 25px;
+            gap: 20px;
         }
 
         nav ul li a {
             color: #fff;
             text-decoration: none;
             font-weight: 500;
+            font-size: 0.95rem;
             transition: 0.3s;
         }
 
@@ -63,181 +67,203 @@
             color: var(--gold);
         }
 
-        /* HERO SECTION */
+        /* --- HERO SECTION --- */
         .hero {
-            background: url('https://raw.githubusercontent.com/workspace-2026/Logo/refs/heads/main/Mimcontruction%20.jpeg') center/cover no-repeat;
-            padding: 150px 20px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://raw.githubusercontent.com/workspace-2026/Logo/refs/heads/main/Mimcontruction%20.jpeg') center/cover no-repeat;
+            padding: 140px 20px;
             text-align: center;
             color: #fff;
-            position: relative;
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.55);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 700px;
-            margin: auto;
         }
 
         .hero h1 {
-            font-size: 46px;
+            font-size: clamp(2rem, 5vw, 3rem);
             color: var(--gold);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
         }
 
         .hero p {
-            font-size: 22px;
-            margin-bottom: 25px;
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-inline: auto;
         }
 
         .cta-btn {
             background: var(--gold);
             color: #000;
-            padding: 14px 28px;
-            border-radius: 6px;
-            font-size: 18px;
+            padding: 16px 32px;
+            border-radius: 4px;
+            font-size: 1.1rem;
             font-weight: bold;
             text-decoration: none;
-            transition: 0.3s;
+            transition: 0.3s ease;
+            display: inline-block;
         }
 
         .cta-btn:hover {
-            background: #fff;
+            background: var(--white);
+            transform: translateY(-2px);
         }
 
-        /* ABOUT SECTION */
-        .about-section {
-            padding: 60px 20px;
+        /* --- ABOUT SECTION --- */
+        .section-padding {
+            padding: 80px 20px;
             max-width: 1100px;
             margin: auto;
+        }
+
+        .about-section {
             text-align: center;
         }
 
         .about-section h2 {
-            font-size: 32px;
-            margin-bottom: 15px;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .about-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gold);
         }
 
         .about-section p {
-            max-width: 800px;
-            margin: auto;
-            font-size: 18px;
-            opacity: 0.9;
+            font-size: 1.15rem;
+            margin-top: 20px;
+            color: #555;
         }
 
-        /* SLIDESHOW */
-        .slider-container {
+        /* --- NEW SWIPE SLIDER --- */
+        .slider-wrapper {
             position: relative;
             width: 100%;
-            aspect-ratio: 16 / 9;
-            overflow: hidden;
             background: #000;
+            overflow: hidden;
+            touch-action: pan-y; /* Allows scrolling page but swiping slider */
+            cursor: grab;
         }
 
-        @media (max-width: 600px) {
-            .slider-container {
-                aspect-ratio: 4 / 3;
-            }
+        .slider-wrapper:active {
+            cursor: grabbing;
         }
 
-        .fade-slide {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
+        }
+
+        .slide {
+            min-width: 100%;
+            aspect-ratio: 16 / 9;
             object-fit: cover;
-            object-position: center;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
+            user-select: none;
+            pointer-events: none; /* Prevents image dragging ghost effect */
         }
 
-        .fade-slide.active {
-            opacity: 1;
+        @media (max-width: 768px) {
+            .slide { aspect-ratio: 4 / 3; }
         }
 
-        .nav-btn {
+        .slider-dots {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.5);
-            color: white;
-            border: none;
-            padding: 15px;
-            cursor: pointer;
-            font-size: 20px;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: rgba(255,255,255,0.4);
             border-radius: 50%;
-            z-index: 10;
+            transition: 0.3s;
         }
 
-        .prev { left: 15px; }
-        .next { right: 15px; }
+        .dot.active {
+            background: var(--gold);
+            width: 25px;
+            border-radius: 10px;
+        }
 
-        /* SERVICES */
+        /* --- SERVICES --- */
         .services-section {
-            padding: 60px 20px;
             background: var(--light);
+            padding: 80px 20px;
             text-align: center;
-        }
-
-        .services-section h2 {
-            font-size: 32px;
-            margin-bottom: 10px;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-            max-width: 1100px;
-            margin: 40px auto;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 50px auto 0;
         }
 
         .service-card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-bottom: 4px solid var(--gold);
-            transition: transform 0.3s ease;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--gold);
+            transition: 0.3s;
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
         }
 
-        /* BOOKING + CONTACT */
-        .contact-box,
-        .booking-form {
-            width: 90%;
-            max-width: 600px;
-            margin: 40px auto;
-            background: #000;
-            border: 2px solid var(--gold);
-            padding: 30px;
-            border-radius: 12px;
+        .service-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* --- FORMS & CONTACT --- */
+        .form-container {
+            background: var(--dark);
             color: #fff;
-            text-align: center;
+            padding: 50px 30px;
+            border-radius: 8px;
+            max-width: 700px;
+            margin: 60px auto;
         }
 
-        .contact-box a {
+        .form-container h2 {
             color: var(--gold);
-            text-decoration: none;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
             font-weight: bold;
         }
 
         input, textarea {
             width: 100%;
             padding: 12px;
-            margin: 10px 0 20px;
-            border-radius: 6px;
-            border: none;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background: #222;
+            color: #fff;
+            font-size: 1rem;
         }
 
         .submit-btn {
@@ -245,66 +271,66 @@
             padding: 15px;
             background: var(--gold);
             color: #000;
-            font-weight: bold;
             border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 18px;
+            font-weight: bold;
             text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
-        /* FOOTER */
-        .site-footer {
+        .submit-btn:hover {
+            background: #fff;
+        }
+
+        .contact-details {
+            text-align: center;
+            padding: 40px;
+            background: var(--light);
+            border-radius: 8px;
+            margin-bottom: 60px;
+        }
+
+        .contact-details a {
+            color: #000;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        /* --- FOOTER --- */
+        footer {
             background: #000;
-            color: #fff;
-            padding: 40px 20px 20px;
-            border-top: 4px solid var(--gold);
-            margin-top: 60px;
+            color: #bbb;
+            padding: 60px 20px 20px;
+            text-align: center;
         }
 
-        .footer-content {
+        .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
             max-width: 1100px;
-            margin: auto;
+            margin: 0 auto 40px;
             text-align: left;
         }
 
-        .footer-section h3,
-        .footer-section h4 {
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
-
-        .footer-section a {
-            color: var(--gold);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .footer-section a:hover {
-            text-decoration: underline;
-        }
+        footer h4 { color: var(--gold); margin-bottom: 15px; }
+        footer p { margin-bottom: 8px; }
 
         .footer-bottom {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 15px;
-            border-top: 1px solid #333;
-            font-size: 14px;
-            opacity: 0.8;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- NAVIGATION -->
     <nav>
         <div class="logo">M.I.M Construction</div>
         <ul>
-            <li><a href="#hero">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#booking">Book</a></li>
@@ -312,146 +338,210 @@
         </ul>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <h1>Quality Construction You Can Trust</h1>
-            <p>Professional residential services built with precision, honesty, and craftsmanship.</p>
-            <a href="#booking" class="cta-btn">Book Appointment</a>
-        </div>
+    <section class="hero" id="home">
+        <h1>Quality Construction You Can Trust</h1>
+        <p>Professional residential services built with precision, honesty, and craftsmanship.</p>
+        <a href="#booking" class="cta-btn">Book Free Estimate</a>
     </section>
 
-    <!-- ABOUT -->
-    <section class="about-section" id="about">
-        <h2>About M.I.M General Construction</h2>
+    <section class="section-padding about-section" id="about">
+        <h2>About M.I.M Construction</h2>
         <p>
             With years of hands-on experience, M.I.M General Construction delivers reliable, high‑quality 
-            residential construction and remodeling services. From framing and carpentry to full home 
-            renovations, we take pride in craftsmanship that lasts. Our team is committed to professionalism, 
-            clear communication, and results that exceed expectations.
+            residential construction and remodeling services. We take pride in craftsmanship that lasts. 
+            Our team is committed to professionalism, clear communication, and results that exceed expectations.
         </p>
     </section>
 
-    <!-- SLIDESHOW -->
-    <section class="slider-container">
+    <div class="slider-wrapper" id="slider">
+        <div class="slider-track" id="track">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Logo/refs/heads/main/Mimcontruction%20.jpeg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image9.jpeg/refs/heads/main/Image9.jpeg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image12.jpeg/refs/heads/main/Image5.jpeg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image17.jpeg/refs/heads/main/Image17.jpeg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/image22.jpeg/refs/heads/main/image22.jpeg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/image49.jpeg/refs/heads/main/image45.jpeg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image18.jpeg/refs/heads/main/Image18.jpeg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/image62.jpeg/refs/heads/main/image62.jpeg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image10.jpeg/refs/heads/main/Image10.jpeg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image12..jpeg/refs/heads/main/Image12..jpeg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image13.jpeg/refs/heads/main/Image13.jpeg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_190758.jpg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_190755.jpg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_182152.jpg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_103319.jpg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260306_102641.jpg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0147.jpg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0148.jpg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0149.jpg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0150.jpg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0151.jpg">
+        </div>
+        <div class="slider-dots" id="dots"></div>
+    </div>
 
-        <!-- Your images preserved -->
-        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Logo/refs/heads/main/Mimcontruction%20.jpeg">
-        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Image9.jpeg/refs/heads/main/Image9.jpeg">
-        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Image12.jpeg/refs/heads/main/Image5.jpeg">
-        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Image17.jpeg/refs/heads/main/Image17.jpeg">
-        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/image22.jpeg/refs/heads/main/image22.jpeg">
-        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/image49.jpeg/refs/heads/main/image45.jpeg">
-        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Image18.jpeg/refs/heads/main/Image18.jpeg">
-        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/image62.jpeg/refs/heads/main/image62.jpeg">
-        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Image10.jpeg/refs/heads/main/Image10.jpeg">
-        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Image12..jpeg/refs/heads/main/Image12..jpeg">
-        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/Image13.jpeg/refs/heads/main/Image13.jpeg">
-        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_190758.jpg">
-         <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_190755.jpg">
-         <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_182152.jpg">
-         <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_103319.jpg">
-        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260306_102641.jpg">
-         <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0147.jpg">
-         <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0148.jpg">
-         <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0149.jpg">
-        <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0150.jpg">
-         <img class="fade-slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0151.jpg">
-
-
-
-
-        <button class="nav-btn prev" onclick="changeSlide(-1)">&#10094;</button>
-        <button class="nav-btn next" onclick="changeSlide(1)">&#10095;</button>
-    </section>
-
-    <!-- SERVICES -->
     <section class="services-section" id="services">
         <h2>Our Professional Services</h2>
-
         <div class="services-grid">
-            <div class="service-card"><h3>🔨 General Construction</h3><p>From framing to finishing, we build with precision and durability.</p></div>
-            <div class="service-card"><h3>🏠 Home Remodeling</h3><p>Transform your home with modern upgrades and custom improvements.</p></div>
-            <div class="service-card"><h3>🧰 Repairs & Fixes</h3><p>Drywall, flooring, structural repairs, and more.</p></div>
-            <div class="service-card"><h3>🚪 Custom Carpentry</h3><p>Trim, doors, cabinetry, and custom woodwork built to perfection.</p></div>
-            <div class="service-card"><h3>🛁 Kitchen & Bath</h3><p>Tile, cabinets, plumbing, and full renovation services.</p></div>
-            <div class="service-card"><h3>📐 Project Planning</h3><p>Clear timelines, organized workflow, and professional management.</p></div>
+            <div class="service-card"><h3>🔨 Construction</h3><p>Framing, additions, and structural work built to code and built to last.</p></div>
+            <div class="service-card"><h3>🏠 Remodeling</h3><p>Modern interior and exterior transformations for your home.</p></div>
+            <div class="service-card"><h3>🛁 Kitchen & Bath</h3><p>Complete renovations including tile work, plumbing, and cabinetry.</p></div>
+            <div class="service-card"><h3>🚪 Carpentry</h3><p>Custom trim, doors, and finish carpentry with expert precision.</p></div>
+            <div class="service-card"><h3>🧰 Repairs</h3><p>Drywall, flooring, and general maintenance for your property.</p></div>
+            <div class="service-card"><h3>📐 Planning</h3><p>Professional project management and clear, honest estimates.</p></div>
         </div>
     </section>
 
-    <!-- BOOKING -->
-    <div class="booking-form" id="booking">
-        <h2 style="color:var(--gold)">Book an Appointment</h2>
-
-        <form action="#" method="POST" style="text-align:left;">
-            <label>Full Name</label><input type="text" required>
-            <label>Phone Number</label><input type="tel" required>
-            <label>Preferred Date</label><input type="date" required>
-            <label>Project Details</label><textarea rows="4" required></textarea>
-            <button type="submit" class="submit-btn">Send Request</button>
-        </form>
-    </div>
-
-    <!-- CONTACT -->
-    <div class="contact-box" id="contact">
-        <h2 style="color:var(--gold)">Contact Us</h2>
-
-        <p>Phone: <a href="tel:7084381640">(708) 438‑1640</a></p>
-        <br>
-        <p>José Patiño</p>
-        <p>Phone: <a href="tel:3129297084">(312) 929‑7084</a></p>
-    </div>
-
-    <!-- FOOTER -->
-    <footer class="site-footer">
-        <div class="footer-content">
-
-            <div class="footer-section">
-                <h3>M.I.M General Construction</h3>
-                <p>Professional Residential Services • Built to Last</p>
-            </div>
-
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <p>📞 (708) 438‑1640</p>
-                <p>📞 (312) 929‑7084</p>
-            </div>
-
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="#about">About</a><br>
-                <a href="#services">Services</a><br>
-                <a href="#booking">Book Appointment</a><br>
-                <a href="#contact">Contact</a>
-            </div>
-
+    <div class="section-padding">
+        <div class="form-container" id="booking">
+            <h2>Book an Appointment</h2>
+            <form action="#">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="(000) 000-0000" required>
+                </div>
+                <div class="input-group">
+                    <label>Preferred Date</label>
+                    <input type="date" required>
+                </div>
+                <div class="input-group">
+                    <label>How can we help?</label>
+                    <textarea rows="4" placeholder="Describe your project..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Request</button>
+            </form>
         </div>
 
+        <div class="contact-details" id="contact">
+            <h2>Get In Touch Directly</h2>
+            <p style="margin-bottom: 20px;">For immediate assistance, call us today:</p>
+            <p><a href="tel:7084381640">(708) 438-1640</a></p>
+            <p style="margin: 15px 0;">— or —</p>
+            <p><strong>José Patiño:</strong> <a href="tel:3129297084">(312) 929-7084</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h4>M.I.M Construction</h4>
+                <p>Professional Residential Services</p>
+                <p>Built with Integrity.</p>
+            </div>
+            <div>
+                <h4>Contact Info</h4>
+                <p>📞 (708) 438-1640</p>
+                <p>📞 (312) 929-7084</p>
+            </div>
+            <div>
+                <h4>Navigation</h4>
+                <p><a href="#home" style="color:#fff; text-decoration:none;">Home</a></p>
+                <p><a href="#about" style="color:#fff; text-decoration:none;">About Us</a></p>
+                <p><a href="#services" style="color:#fff; text-decoration:none;">Services</a></p>
+            </div>
+        </div>
         <div class="footer-bottom">
-            <p>© 2025 M.I.M General Construction • All Rights Reserved</p>
+            <p>© 2026 M.I.M General Construction • Chicago & Surrounding Suburbs</p>
         </div>
     </footer>
 
-    <!-- SLIDESHOW SCRIPT -->
     <script>
+        const track = document.getElementById('track');
+        const slider = document.getElementById('slider');
+        const slides = Array.from(track.children);
+        const dotsNav = document.getElementById('dots');
+
         let currentIndex = 0;
-        const slides = document.querySelectorAll('.fade-slide');
+        let isDragging = false;
+        let startPos = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID = 0;
 
-        function showSlide(index) {
-            slides.forEach(s => s.classList.remove('active'));
-            currentIndex = (index + slides.length) % slides.length;
-            slides[currentIndex].classList.add('active');
+        // Create dots
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if(i === 0) dot.classList.add('active');
+            dotsNav.appendChild(dot);
+        });
+        const dots = Array.from(dotsNav.children);
+
+        // Events
+        slider.addEventListener('touchstart', dragStart);
+        slider.addEventListener('touchend', dragEnd);
+        slider.addEventListener('touchmove', dragAction);
+        slider.addEventListener('mousedown', dragStart);
+        slider.addEventListener('mouseup', dragEnd);
+        slider.addEventListener('mouseleave', dragEnd);
+        slider.addEventListener('mousemove', dragAction);
+
+        function dragStart(e) {
+            isDragging = true;
+            startPos = getPositionX(e);
+            animationID = requestAnimationFrame(animation);
+            slider.style.cursor = 'grabbing';
         }
 
-        function changeSlide(direction) {
-            showSlide(currentIndex + direction);
+        function dragAction(e) {
+            if (isDragging) {
+                const currentPosition = getPositionX(e);
+                currentTranslate = prevTranslate + currentPosition - startPos;
+            }
         }
 
-        setInterval(() => changeSlide(1), 4000);
+        function dragEnd() {
+            isDragging = false;
+            cancelAnimationFrame(animationID);
+            slider.style.cursor = 'grab';
+
+            const movedBy = currentTranslate - prevTranslate;
+            if (movedBy < -100 && currentIndex < slides.length - 1) currentIndex += 1;
+            if (movedBy > 100 && currentIndex > 0) currentIndex -= 1;
+
+            setPositionByIndex();
+        }
+
+        function getPositionX(e) {
+            return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        }
+
+        function animation() {
+            setSliderPosition();
+            if (isDragging) requestAnimationFrame(animation);
+        }
+
+        function setSliderPosition() {
+            track.style.transform = `translateX(${currentTranslate}px)`;
+        }
+
+        function setPositionByIndex() {
+            currentTranslate = currentIndex * -slider.offsetWidth;
+            prevTranslate = currentTranslate;
+            setSliderPosition();
+            updateDots();
+        }
+
+        function updateDots() {
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[currentIndex].classList.add('active');
+        }
+
+        // Auto-Slide
+        setInterval(() => {
+            if (!isDragging) {
+                currentIndex = (currentIndex + 1) % slides.length;
+                setPositionByIndex();
+            }
+        }, 5000);
+
+        // Resize Fix
+        window.addEventListener('resize', setPositionByIndex);
     </script>
-
 </body>
 </html>
-
- 
 
