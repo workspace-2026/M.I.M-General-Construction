@@ -148,7 +148,7 @@
             width: 100%;
             background: #000;
             overflow: hidden;
-            touch-action: pan-y; /* Allows scrolling page but swiping slider */
+            touch-action: pan-y; 
             cursor: grab;
         }
 
@@ -167,7 +167,7 @@
             aspect-ratio: 16 / 9;
             object-fit: cover;
             user-select: none;
-            pointer-events: none; /* Prevents image dragging ghost effect */
+            pointer-events: none; 
         }
 
         @media (max-width: 768px) {
@@ -356,25 +356,28 @@
     <div class="slider-wrapper" id="slider">
         <div class="slider-track" id="track">
             <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Logo/refs/heads/main/Mimcontruction%20.jpeg">
-            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image9.jpeg/refs/heads/main/Image9.jpeg">
+            
             <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image12.jpeg/refs/heads/main/Image5.jpeg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image12..jpeg/refs/heads/main/Image12..jpeg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_190758.jpg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_190755.jpg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image13.jpeg/refs/heads/main/Image13.jpeg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0149.jpg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0150.jpg">
+            
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image9.jpeg/refs/heads/main/Image9.jpeg">
             <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image17.jpeg/refs/heads/main/Image17.jpeg">
             <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/image22.jpeg/refs/heads/main/image22.jpeg">
+            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_182152.jpg">
+            
             <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/image49.jpeg/refs/heads/main/image45.jpeg">
             <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image18.jpeg/refs/heads/main/Image18.jpeg">
             <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/image62.jpeg/refs/heads/main/image62.jpeg">
             <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image10.jpeg/refs/heads/main/Image10.jpeg">
-            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image12..jpeg/refs/heads/main/Image12..jpeg">
-            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/Image13.jpeg/refs/heads/main/Image13.jpeg">
-            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_190758.jpg">
-            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_190755.jpg">
-            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_182152.jpg">
             <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260314_103319.jpg">
             <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/20260306_102641.jpg">
             <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0147.jpg">
             <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0148.jpg">
-            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0149.jpg">
-            <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0150.jpg">
             <img class="slide" src="https://raw.githubusercontent.com/workspace-2026/M.I.M-General-Construction/refs/heads/main/IMG_0151.jpg">
         </div>
         <div class="slider-dots" id="dots"></div>
@@ -528,7 +531,7 @@
 
         function updateDots() {
             dots.forEach(dot => dot.classList.remove('active'));
-            dots[currentIndex].classList.add('active');
+            if (dots[currentIndex]) dots[currentIndex].classList.add('active');
         }
 
         // Auto-Slide
